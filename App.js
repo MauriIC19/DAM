@@ -1,28 +1,31 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TextInput, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text
+} from "react-native";
+
+import Button from './components/Button';
 
 export default function App() {
-
   const [name, setName] = useState("Mundo");
-  //let name = "Mundo";
 
   const inputManager = (text) => {
     setName(text);
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>
-        Hola, {name}.
-      </Text>
+      <Text style={styles.header}>Hola, {name}.</Text>
       <TextInput
         style={styles.input}
         onChangeText={inputManager}
-        placeholder="useless placeholder"
-        secureTextEntry={false}
+        placeholder="Usuario..."
       />
-      <StatusBar style="light" />
+      <Button/>
+      <StatusBar backgroundColor="red" style="light" hidden={false} />
     </View>
   );
 }
@@ -38,13 +41,14 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 60,
     margin: 12,
-    borderWidth: 1,
+    borderRadius: 10,
     padding: 10,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    fontFamily: "Helvetica"
   },
   header: {
     color: "white",
     fontSize: 80,
-    fontFamily: 'Helvetica'
-  }
+    fontFamily: "Helvetica",
+  },
 });
