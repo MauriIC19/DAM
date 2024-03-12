@@ -1,15 +1,10 @@
-import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
-export default Button = () => {
-  
-    const login = () => {
-    Alert.alert("Bienvenido", "¡Hola, Mundo!");
-  };
-
+export default Button = (props) => {
   return (
-    <TouchableOpacity onPress={login}>
-      <View style={styles.button_container}>
-        <Text style={styles.button_text}>Iniciar sesión</Text>
+    <TouchableOpacity onPress={props.action}>
+      <View style={[styles.button_container, props.style]}>
+        <Text style={styles.button_text}>{props.text}</Text>
       </View>
     </TouchableOpacity>
   );
