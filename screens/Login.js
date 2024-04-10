@@ -1,22 +1,15 @@
-import * as React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
 
-import Button from "../components/Button";
+import { Button } from "../components/Button";
+import { useAuth } from "../AuthContext";
 
-export default function Login() {
+export default function Login({ navigation }) {
+  const { signIn } = useAuth();
+
   const userForm = {
     mail: null,
     password: null,
-  }
-
-  const login = () => {
-    Alert.alert("Bienvenido", "Sesión iniciada");
-    signIn(name, password);
-  };
-
-  const signin = () => {
-    Alert.alert("Bienvenido", "Registro exitoso");
   };
 
   return (
@@ -25,23 +18,29 @@ export default function Login() {
         <Text style={styles.header}>Hola, Mundo.</Text>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => { userForm.mail = text }}
+          onChangeText={(text) => {
+            userForm.mail = text;
+          }}
           placeholder="Usuario..."
         />
         <TextInput
           style={styles.input}
-          onChangeText={(text) => { userForm.password = text }}
+          onChangeText={(text) => {
+            userForm.password = text;
+          }}
           placeholder="Contraseña..."
           secureTextEntry={true}
         />
         <Button
           text={"Iniciar sesión"}
           style={{ backgroundColor: "white" }}
-          action={login}
+          action={() => signIn(userForm.mail, userForm.password)}
         />
       </View>
       <View style={styles.bottom_container}>
-        <Text onPress={()=>{console.log()}} style={styles.link}>¿No tienes cuenta? ¡Regístrate!</Text>
+        <Text onPress={() => navigation.navigate("SignIn")} style={styles.link}>
+          ¿No tienes cuenta? ¡Regístrate!
+        </Text>
       </View>
       <StatusBar backgroundColor="red" style="light" hidden={false} />
     </View>
@@ -84,6 +83,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-    paddingBottom: 25
+    paddingBottom: 25,
   },
 });

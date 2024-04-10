@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
-export default Button = (props) => {
+export const Button = (props) => {
   return (
     <TouchableOpacity onPress={props.action}>
       <View style={[styles.button_container, props.style]}>

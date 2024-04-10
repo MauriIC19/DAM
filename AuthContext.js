@@ -18,26 +18,26 @@ export function AuthProvider(props) {
         case "CHECK_SESSION":
           return {
             ...prevState,
-            isLoading: false,
-            userToken: action.user,
+            loading: false,
+            user: action.user,
           };
         case "SIGN_IN":
           return {
             ...prevState,
-            isSignout: false,
-            userToken: action.user,
+            signout: false,
+            user: action.user,
           };
         case "SIGN_OUT":
           return {
             ...prevState,
-            isSignout: true,
-            userToken: null,
+            signout: true,
+            user: null,
           };
       }
     },
     {
-      isSignout: false,
-      isLoading: true,
+      signout: false,
+      loading: true,
       user: null,
     }
   );
@@ -59,14 +59,17 @@ export function AuthProvider(props) {
 
   const auth = useMemo(
     () => ({
-      isSignout: state.isSignout,
-      isLoading: state.isLoading,
+      signout: state.signout,
+      loading: state.loading,
       user: state.user,
-      signIn: async (data) => {
+      signIn: async (user, password) => {
+        console.log(user, password);
+        //Aquí la lógica para validar si es un usuario válido
         //await AsyncStorage.setItem("user", JSON.stringify(data));
-        dispatch({ type: "SIGN_IN", user: "usuario-falso" });
+        dispatch({ type: "SIGN_IN", user: "dummy user" });
       },
       signOut: async () => {
+        //Aquí en realidad no hay mayor lógica más resetear las variables
         //await AsyncStorage.removeItem("user");
         dispatch({ type: "SIGN_OUT" });
       },

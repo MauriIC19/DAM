@@ -1,43 +1,50 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
 
-import Button from "../components/Button";
+import { Button } from "../components/Button";
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   const userForm = {
     user: null,
     mail: null,
     password: null,
-    password_check: null
-  }
+    password_check: null,
+  };
 
   const signin = () => {
-    console.log(userForm)
+    console.log(userForm);
     Alert.alert("Bienvenido", "Registro exitoso");
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.upper_container}>
-        <Text style={[styles.header, {width: "90%", fontSize: 50, textAlign: "left"}]}>Registro</Text>
+        <Text
+          style={[
+            styles.header,
+            { width: "90%", fontSize: 50, textAlign: "left" },
+          ]}
+        >
+          Registro
+        </Text>
         <TextInput
-          onChangeText={(text) => userForm.user = text}
+          onChangeText={(text) => (userForm.user = text)}
           style={styles.input}
           placeholder="Usuario..."
         />
         <TextInput
-          onChangeText={(text) => userForm.mail = text}
+          onChangeText={(text) => (userForm.mail = text)}
           style={styles.input}
           placeholder="Correo..."
         />
         <TextInput
-          onChangeText={(text) => userForm.password = text}
+          onChangeText={(text) => (userForm.password = text)}
           style={styles.input}
           placeholder="Contraseña..."
           secureTextEntry={true}
         />
-         <TextInput
-          onChangeText={(text) => userForm.password_check = text}
+        <TextInput
+          onChangeText={(text) => (userForm.password_check = text)}
           style={styles.input}
           placeholder="Confirmar contraseña..."
           secureTextEntry={true}
@@ -49,7 +56,9 @@ export default function SignIn() {
         />
       </View>
       <View style={styles.bottom_container}>
-        <Text onPress={()=>{console.log()}} style={styles.link}>Ya tengo cuenta</Text>
+        <Text onPress={() => navigation.navigate("Login")} style={styles.link}>
+          Ya tengo cuenta
+        </Text>
       </View>
       <StatusBar backgroundColor="red" style="light" hidden={false} />
     </View>
@@ -92,6 +101,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-    paddingBottom: 25
+    paddingBottom: 25,
   },
 });
