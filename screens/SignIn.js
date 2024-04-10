@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
 
 import Button from "../components/Button";
 
-export default function signin() {
+export default function SignIn() {
   const userForm = {
     user: null,
     mail: null,

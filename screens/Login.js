@@ -1,18 +1,18 @@
-import { useState } from "react";
+import * as React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
 
 import Button from "../components/Button";
 
-export default function login() {
-  const [name, setName] = useState("Mundo");
-
-  const inputManager = (text) => {
-    setName(text);
-  };
+export default function Login() {
+  const userForm = {
+    mail: null,
+    password: null,
+  }
 
   const login = () => {
     Alert.alert("Bienvenido", "Sesión iniciada");
+    signIn(name, password);
   };
 
   const signin = () => {
@@ -22,15 +22,15 @@ export default function login() {
   return (
     <View style={styles.container}>
       <View style={styles.upper_container}>
-        <Text style={styles.header}>Hola, {name}.</Text>
+        <Text style={styles.header}>Hola, Mundo.</Text>
         <TextInput
           style={styles.input}
-          onChangeText={inputManager}
+          onChangeText={(text) => { userForm.mail = text }}
           placeholder="Usuario..."
         />
         <TextInput
           style={styles.input}
-          onChangeText={inputManager}
+          onChangeText={(text) => { userForm.password = text }}
           placeholder="Contraseña..."
           secureTextEntry={true}
         />
