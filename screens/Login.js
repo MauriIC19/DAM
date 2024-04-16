@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
+import { StyleSheet, View, TextInput, Text } from "react-native";
 
 import { Button } from "../components/Button";
 import { useAuth } from "../AuthContext";
@@ -18,10 +18,11 @@ export default function Login({ navigation }) {
         <Text style={styles.header}>Hola, Mundo.</Text>
         <TextInput
           style={styles.input}
+          autoCapitalize="none"
           onChangeText={(text) => {
             userForm.mail = text;
           }}
-          placeholder="Usuario..."
+          placeholder="Correo..."
         />
         <TextInput
           style={styles.input}

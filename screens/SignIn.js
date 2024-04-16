@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Text, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Button } from "../components/Button";
 
@@ -11,9 +12,17 @@ export default function SignIn({ navigation }) {
     password_check: null,
   };
 
-  const signin = () => {
+  const signin = async () => {
     console.log(userForm);
-    Alert.alert("Bienvenido", "Registro exitoso");
+    try {
+      const user = JSON.stringify(userForm);
+      await AsyncStorage.setItem("user", user);
+      Alert.alert("Bienvenido", "Registro exitoso");
+      navigation.navigate("Login");
+    } catch (e) {
+      console.log(e);
+      Alert("Error", "Ocurrió un error");
+    }
   };
 
   return (
@@ -34,6 +43,7 @@ export default function SignIn({ navigation }) {
         />
         <TextInput
           onChangeText={(text) => (userForm.mail = text)}
+          autoCapitalize="none"
           style={styles.input}
           placeholder="Correo..."
         />

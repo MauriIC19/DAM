@@ -5,7 +5,8 @@ import React, {
   useMemo,
   useContext,
 } from "react";
-//import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AuthContext = createContext();
 
@@ -62,11 +63,21 @@ export function AuthProvider(props) {
       signout: state.signout,
       loading: state.loading,
       user: state.user,
-      signIn: async (user, password) => {
-        console.log(user, password);
-        //Aquí la lógica para validar si es un usuario válido
-        //await AsyncStorage.setItem("user", JSON.stringify(data));
-        dispatch({ type: "SIGN_IN", user: "dummy user" });
+      signIn: async (mail, password) => {
+        console.log(mail, password);
+        try {
+          const user = JSON.parse(await AsyncStorage.getItem("user"));
+          if(user.mail == mail && user.password == password) {
+            dispatch({ type: "SIGN_IN", user: user });
+          }
+          else {
+            Alert.alert("Error", "Usuario y/o contraseña incorrectos");
+          }
+          console.log(user);
+        } catch (e) {
+          console.log(e);
+          Alert.alert("Error", "Ocurrió un error");
+        }
       },
       signOut: async () => {
         //Aquí en realidad no hay mayor lógica más resetear las variables
